@@ -3,32 +3,28 @@
 
 import speech
 import sys
+import time
 
-inputs = ["hi", "foo", "lemon", "hello world"]
+lemon = "lemon"
 output = []
 current_run = []
 
+waiting = False
+hasDetect = False
+
+print "Say something."
+
 def callback(phrase, listener):
     speech.say(phrase)
-    if phrase == "turn off":
-        speech.say("Goodbye.")
-        listener.stoplistening()
-        sys.exit()
-
-print "Anything you type, speech will say back."
-print "Anything you say, speech will print out."
-print "Say or type 'turn off' to quit."
-print
+    print phrase
+    lemon = str(phrase)
+    print lemon
+    hasDetect = True
+    waiting = False
 
 listener = speech.listenforanything(callback)
 
 while listener.islistening():
-    for i in range(0, len(inputs)):
-        speech.say(str(inputs[i]))
-
-    text = raw_input("> ")
-    if text == "turn off":
-        listener.stoplistening()
-        sys.exit()
-    else:
-        speech.say(text)
+    if not waiting and not hasDetect:
+        waiting = True
+        speech.say(lemon)
