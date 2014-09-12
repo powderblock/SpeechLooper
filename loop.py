@@ -18,7 +18,6 @@ def callback(phrase, listener):
     speech.say(phrase)
     print phrase
     lemon = str(phrase)
-    print lemon
     hasDetect = True
     waiting = False
 
